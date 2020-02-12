@@ -22,7 +22,7 @@ export default {
     </label>
 
     <label>
-      Order date
+      Purchase number
       <input v-model="order.purchaseNumber" type="text" />
     </label>
   </div>
