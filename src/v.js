@@ -1,13 +1,7 @@
 import Vue from 'vue';
 
-class Order {
-  constructor(initialState) {
-    Object.assign(this, { ...initialState })
-  }
-}
-
 const state = Vue.observable({
-  order: new Order(),
+  order: {},
   validations: {}
 })
 
@@ -33,7 +27,7 @@ const v = {
 
   methods: {
     updateModel(payload) {
-      state.order = new Order({ ...this.order, ...payload })
+      state.order = { ...this.order, ...payload }
     },
     updateSchema(
       schema,
@@ -55,7 +49,7 @@ const v = {
       }), initialState)
 
       state.validations = { ...state.validations, ...validations }
-      state.order = new Order({ ...this.order, ...order })
+      state.order = { ...this.order, ...order }
     }
   }
 }
