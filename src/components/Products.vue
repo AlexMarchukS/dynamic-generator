@@ -6,10 +6,6 @@ export default {
 
   mixins: [v],
 
-  created() {
-    this.updateSchema(this.fields);
-  },
-
   methods: {
     handleAdd() {
       const entries = [...this.order.entries, { productName: "", price: 0 }];

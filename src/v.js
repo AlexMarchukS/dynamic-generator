@@ -25,6 +25,12 @@ const v = {
 
   validations: () => ({ order: state.validations }),
 
+  created() {
+    if (this.fields) {
+      this.updateSchema(this.fields);
+    }
+  },
+
   methods: {
     updateModel(payload) {
       state.order = new Order({ ...this.order, ...payload })

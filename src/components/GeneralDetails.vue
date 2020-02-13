@@ -4,11 +4,7 @@ import { v } from "@/v";
 export default {
   name: "GeneralDetails",
 
-  mixins: [v],
-
-  created() {
-    this.updateSchema(this.fields);
-  }
+  mixins: [v]
 };
 </script>
 
