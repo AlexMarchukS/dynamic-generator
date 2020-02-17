@@ -1,9 +1,9 @@
-import Vue from 'vue';
-
-const state = Vue.observable({
-  order: {},
-  validations: {}
-})
+import {
+  state,
+  serialize,
+  getFirstError,
+  getErrorsStack
+} from './lib';
 
 const v = {
   props: {
@@ -15,6 +15,30 @@ const v = {
 
   computed: {
     order: () => state.order,
+    getFirst() {
+      return field => {
+        const { order } = this.$v;
+        const { validations } = this.fields[field];
+
+        if (!validations || !(order[field].$invalid && order[field].$dirty)) {
+          return null;
+        }
+
+        return getFirstError(order, field, this.fields[field].validations);
+      }
+    },
+    getErrors() {
+      return field => {
+        const { order } = this.$v;
+        const { validations } = this.fields[field];
+
+        if (!validations || !(order[field].$invalid && order[field].$dirty)) {
+          return null;
+        }
+
+        return getErrorsStack(order, field, this.fields[field].validations)
+      }
+    }
   },
 
   validations: () => ({ order: state.validations }),
@@ -29,10 +53,7 @@ const v = {
     updateModel(payload) {
       state.order = { ...this.order, ...payload }
     },
-    updateSchema(
-      schema,
-      options = { override: false }
-    ) {
+    updateSchema(schema, options = { override: false }) {
       const { override } = options;
       const keys = Object.keys(schema);
       const initialState = { order: {}, validations: {} }
@@ -44,7 +65,7 @@ const v = {
         },
         validations: {
           ...validations,
-          ...(schema[key].validations && { [key]: schema[key].validations })
+          [key]: serialize(schema, key),
         }
       }), initialState)
 
@@ -54,4 +75,6 @@ const v = {
   }
 }
 
-export { v }
+export {
+  v
+}

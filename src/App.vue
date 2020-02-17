@@ -1,5 +1,5 @@
 <script>
-import { required } from "vuelidate/lib/validators";
+import { required, minLength, maxLength } from "vuelidate/lib/validators";
 import Context from "./components/Context";
 
 export default {
@@ -17,12 +17,33 @@ export default {
         fields: {
           orderDate: {
             value: "",
+            label: "Order date",
+            type: "text",
             validations: {
-              required
+              required: {
+                msg: "This field is requied",
+                fn: required
+              },
+              maxLength: {
+                msg: "MAX...",
+                fn: maxLength(5)
+              },
+              minLength: {
+                msg: "MIN...",
+                fn: minLength(3)
+              }
             }
           },
           purchaseNumber: {
-            value: ""
+            value: "",
+            type: "number",
+            label: "Purchase Number",
+            validations: {
+              required: {
+                msg: "This field is requied",
+                fn: required
+              }
+            }
           }
         }
       }

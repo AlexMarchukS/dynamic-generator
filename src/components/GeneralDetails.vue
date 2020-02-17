@@ -12,14 +12,26 @@ export default {
   <div class="general-details">
     <h3>General Details</h3>
 
-    <label>
-      Order date*
-      <input v-model="order.orderDate" type="text" />
-    </label>
+    <div v-for="(body, field, key) in fields" :key="key">
+      <label>
+        {{ body.label }}
+        {{ body.validations && body.validations.required && '*' }}
+        <input
+          v-model="$v.order[field].$model"
+          :type="body.type"
+        />
+      </label>
 
-    <label>
-      Purchase number
-      <input v-model="order.purchaseNumber" type="text" />
-    </label>
+      <div v-if="getFirst(field)">
+        As string:
+        {{ getFirst(field) }}
+      </div>
+      <div>
+        As array:
+        <pre>
+          {{getErrors(field)}}
+        </pre>
+      </div>
+    </div>
   </div>
 </template>
