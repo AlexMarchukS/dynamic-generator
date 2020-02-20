@@ -22,16 +22,7 @@ export default {
         />
       </label>
 
-      <div v-if="getFirst(field)">
-        As string:
-        {{ getFirst(field) }}
-      </div>
-      <div>
-        As array:
-        <pre>
-          {{getErrors(field)}}
-        </pre>
-      </div>
+      <div v-if="getFirst(field)">{{ getFirst(field) }}</div>
     </div>
   </div>
 </template>

@@ -56,20 +56,18 @@ const v = {
     updateSchema(schema, options = { override: false }) {
       const { override } = options;
       const keys = Object.keys(schema);
-      const initialState = { order: {}, validations: {} }
 
-      const { order, validations } = keys.reduce(({ order, validations }, key) => ({
-        order: {
-          ...order,
-          [key]: !override && this.order[key] ? this.order[key] : schema[key].value,
-        },
-        validations: {
-          ...validations,
-          [key]: serialize(schema, key),
-        }
-      }), initialState)
+      const order = keys.reduce((acc, key) => ({
+        ...acc,
+        [key]: !override && this.order[key] ? this.order[key] : schema[key].value
+      }), {})
 
-      state.validations = { ...state.validations, ...validations }
+      const validations = serialize(schema);
+
+      state.validations = {
+        ...state.validations, ...validations
+      }
+
       state.order = { ...this.order, ...order }
     }
   }
