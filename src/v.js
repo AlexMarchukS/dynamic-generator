@@ -2,7 +2,8 @@ import {
   state,
   serialize,
   getFirstError,
-  getErrorsStack
+  getErrorsStack,
+  prepareModel
 } from './lib';
 
 const v = {
@@ -54,20 +55,10 @@ const v = {
       state.order = { ...this.order, ...payload }
     },
     updateSchema(schema, options = { override: false }) {
-      const { override } = options;
-      const keys = Object.keys(schema);
-
-      const order = keys.reduce((acc, key) => ({
-        ...acc,
-        [key]: !override && this.order[key] ? this.order[key] : schema[key].value
-      }), {})
-
       const validations = serialize(schema);
+      const order = prepareModel(this, schema, options);
 
-      state.validations = {
-        ...state.validations, ...validations
-      }
-
+      state.validations = { ...state.validations, ...validations }
       state.order = { ...this.order, ...order }
     }
   }
