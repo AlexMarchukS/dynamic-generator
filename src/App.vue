@@ -23,7 +23,7 @@ export default {
     <p :style="{color: status(v.$invalid)}">Is valid: {{ !v.$invalid }}</p>
 
     <component
-      v-for="(body, component, idx) in schema"
+      v-for="(body, component, idx) in schema.components"
       :key="idx"
       :fields="body.fields"
       :is="component"
