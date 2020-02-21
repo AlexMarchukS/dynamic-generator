@@ -17,28 +17,10 @@ const v = {
   computed: {
     order: () => state.order,
     getFirst() {
-      return field => {
-        const { order } = this.$v;
-        const { validations } = this.fields[field];
-
-        if (!validations || !(order[field].$invalid && order[field].$dirty)) {
-          return null;
-        }
-
-        return getFirstError(order, field, this.fields[field].validations);
-      }
+      return field => getFirstError(this.$v.order, field, this.fields[field].validations);
     },
     getErrors() {
-      return field => {
-        const { order } = this.$v;
-        const { validations } = this.fields[field];
-
-        if (!validations || !(order[field].$invalid && order[field].$dirty)) {
-          return null;
-        }
-
-        return getErrorsStack(order, field, this.fields[field].validations)
-      }
+      return field => getErrorsStack(this.$v.order, field, this.fields[field].validations);
     }
   },
 
