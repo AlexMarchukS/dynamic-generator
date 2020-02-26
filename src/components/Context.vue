@@ -5,9 +5,9 @@ const components = {
   generalDetails: {
     fields: {
       orderDate: {
+        componentName: 'x-input',
         value: "",
         label: "Order date",
-        type: "text",
         validations: {
           required: { msg: "This field is requied" },
           maxLength: { msg: "MAX...", params: 5 },
@@ -15,8 +15,8 @@ const components = {
         }
       },
       purchaseNumber: {
+        componentName: 'x-input',
         value: "",
-        type: "number",
         label: "Purchase Number",
         validations: {
           required: { msg: "This field is requied" }

@@ -1,9 +1,8 @@
 import * as vv from 'vuelidate/lib/validators';
 
 function excludeMeta(payload) {
-  // eslint-disable-next-line
-  const { value, type, label, ...rest } = payload;
-  return rest;
+  const { validations, $each } = payload;
+  return { validations, $each };
 }
 
 function toVuelidateSchema(field) {

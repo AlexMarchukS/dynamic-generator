@@ -1,10 +1,15 @@
 <script>
 import { v } from "@/v";
+import XInput from './XInput';
 
 export default {
   name: "GeneralDetails",
 
-  mixins: [v]
+  mixins: [v],
+
+  components: {
+    XInput
+  }
 };
 </script>
 
@@ -13,16 +18,12 @@ export default {
     <h3>General Details</h3>
 
     <div v-for="(body, field, key) in fields" :key="key">
-      <label>
-        {{ body.label }}
-        {{ body.validations && body.validations.required && '*' }}
-        <input
-          v-model="$v.order[field].$model"
-          :type="body.type"
-        />
-      </label>
-
-      <div v-if="getFirst(field)">{{ getFirst(field) }}</div>
+      <component
+        v-model="$v.order[field].$model"
+        :is="body.componentName"
+        :label="body.label"
+      />
+      <!-- <div v-if="getFirst(field)">{{ getFirst(field) }}</div> -->
     </div>
   </div>
 </template>
