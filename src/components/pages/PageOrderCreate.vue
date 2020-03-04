@@ -1,5 +1,7 @@
 <template>
-  <app-context v-slot="{ schema, order, v, getComponent, filteredComponents, getFilteredFields }">
+  <context-order-create
+    v-slot="{ schema, order, v, getComponent, filteredComponents, getFilteredFields }"
+  >
     <div class="page-order-create">
       <layout-one-plus-scroll>
         <template #header>
@@ -29,12 +31,12 @@
         </template>
       </layout-one-plus-scroll>
     </div>
-  </app-context>
+  </context-order-create>
 </template>
 
 <script>
 import LayoutOnePlusScroll from '@/components/layouts/LayoutOnePlusScroll';
-import AppContext from '@/components/app-components/AppContext';
+import ContextOrderCreate from '@/components/contexts/ContextOrderCreate';
 import XCreateOrderSidebarItem from '@/components/business-components/XCreateOrderSidebarItem';
 
 export default {
@@ -42,7 +44,7 @@ export default {
 
   components: {
     LayoutOnePlusScroll,
-    AppContext,
+    ContextOrderCreate,
     XCreateOrderSidebarItem,
     XOrderCreateProducts: () => import('@/components/business-components/XOrderCreateProducts'),
     XOrderCreateGeneralDetails: () => import('@/components/business-components/XOrderCreateGeneralDetails'),
