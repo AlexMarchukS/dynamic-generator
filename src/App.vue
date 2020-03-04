@@ -1,43 +1,28 @@
 <script>
-import Context from "./components/Context";
+import PageOrderCreate from '@/components/pages/PageOrderCreate';
 
 export default {
-  name: "App",
+  name: 'App',
 
   components: {
-    Context,
-    GeneralDetails: () => import("./components/GeneralDetails.vue"),
-    Products: () => import("./components/Products.vue")
+    PageOrderCreate,
   },
-
-  computed: {
-    status() {
-      return isInvalid => (isInvalid ? "red" : "green");
-    }
-  }
 };
 </script>
 
 <template>
-  <context id="app" v-slot="{ schema, order, v }">
-    <p :style="{color: status(v.$invalid)}">Is valid: {{ !v.$invalid }}</p>
-
-    <component
-      v-for="(body, component, idx) in schema.components"
-      :key="idx"
-      :fields="body.fields"
-      :is="component"
-    />
-  </context>
+  <div id="app">
+    <page-order-create />
+  </div>
 </template>
 
 <style>
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>

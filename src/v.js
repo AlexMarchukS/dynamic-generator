@@ -40,11 +40,18 @@ const v = {
       const validations = serialize(schema);
       const order = prepareModel(this, schema, options);
 
-      state.validations = { ...state.validations, ...validations }
-      state.order = { ...this.order, ...order }
-    }
+      state.validations = { ...state.validations, ...validations };
+      state.order = { ...this.order, ...order };
+    },
+    getComponent(domainComponent) {
+      const components = {
+        general_details: 'XOrderCreateGeneralDetails',
+        products: 'XOrderCreateProducts'
+      };
+      return components[domainComponent] ? components[domainComponent] : 'XOrderCreateDefaultSection';
+    },
   }
-}
+};
 
 export {
   v
