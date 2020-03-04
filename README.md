@@ -1,4 +1,4 @@
-# val
+# Dynamic generator for Viax.io
 
 ## Project setup
 ```
